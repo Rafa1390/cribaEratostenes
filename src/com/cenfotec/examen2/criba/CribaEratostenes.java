@@ -2,33 +2,12 @@ package com.cenfotec.examen2.criba;
 
 public class CribaEratostenes {
 	public static int[] generaCriba(int tope){
-		int i,j ;
+		
 		if (tope >= 2){
-			int dim = tope+1;
-			boolean[] primo = new boolean[dim];
 			
-			for (i = 0; i < dim; i++){
-				primo[i] = true;
-			}
-			primo[0] = primo[1] = false;
-			for (i = 2; i< Math.sqrt(dim) + 1; i++){
-				if (primo[i]){
-					for (j = 2*i; j < dim; j+=i){
-						primo[j] = false;
-					}
-				}
-			}
-			int cuenta = 0;
+			boolean[] primo = generaBoolPrimos(tope+1);
 			
-			for (i = 0; i < dim; i++){
-				if (primo[i])
-					cuenta++;
-			}
-			int[] primos = new int[cuenta];
-			for (i = 0,j=0; i < dim; i++){
-				if (primo[i])
-					primos[j++] = i;
-			}
+			int[] primos = generarPrimos(primo);
 			
 			return primos;
 		} else {
@@ -36,4 +15,42 @@ public class CribaEratostenes {
 		}
 		
 	}
+
+	public static boolean[] generaBoolPrimos(int dim) {
+		boolean[] primo = new boolean[dim];
+		
+		for (int i = 0; i < dim; i++){
+			primo[i] = true;
+		}
+		
+		primo[0] = primo[1] = false;
+		
+		for (int i = 2; i< Math.sqrt(dim) + 1; i++){
+			if (primo[i]){
+				for (int j = 2*i; j < dim; j+=i){
+					primo[j] = false;
+				}
+			}
+		}
+		
+		return primo;
+	}
+	
+	public static int[] generarPrimos(boolean[] primo) {
+		int cuenta = 0;
+		
+		for (int i = 0; i < primo.length; i++){
+			if (primo[i])
+				cuenta++;
+		}
+		
+		int[] primos = new int[cuenta];
+		
+		for (int i = 0,j = 0; i < primo.length; i++){
+			if (primo[i])
+				primos[j++] = i;
+		}
+		return primos;
+	}
+	
 }

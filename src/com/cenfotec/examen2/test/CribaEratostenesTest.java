@@ -18,5 +18,18 @@ public class CribaEratostenesTest {
 		assertEquals(5,aCriba[2]);
 		assertEquals(7,aCriba[3]);
 	}
+	
+	@Test
+	public void generaBoolPrimosTest() {
+		boolean[] bPrimos = criba.generaBoolPrimos(11);
+		assertEquals(true,bPrimos[3]);
+	}
+	
+	@Test
+	public void generarPrimosTest() {
+		boolean[] bPrimos = criba.generaBoolPrimos(11);
+		int[] primos = criba.generarPrimos(bPrimos);
+		assertEquals(4,primos.length);
+	}
 
 }
